@@ -3,3 +3,4 @@ swap/
 backups/
 !bundle/vundle
 bundle/
+logfile
