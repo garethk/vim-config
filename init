@@ -1,0 +1,8 @@
+#!/bin/sh
+ln -fs ~/.vim/.vimrc ~/.vimrc
+mkdir bundle
+mkdir bundle/vundle
+git submodule init
+git submodule update
+cd bundle/vundle
+git checkout master
