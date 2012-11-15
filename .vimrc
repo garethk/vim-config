@@ -116,9 +116,9 @@ set foldopen-=search
 " bindings
 
 " NerdTree on Control-N
-inoremap <C-N> <ESC>:NERDTreeToggle<CR>
-nnoremap <C-N> :NERDTreeToggle<CR>
-vnoremap <C-N> :NERDTreeToggle<CR>
+inoremap <silent><C-N> <ESC>:NERDTreeToggle<CR>
+nnoremap <silent><C-N> :NERDTreeToggle<CR>
+vnoremap <silent><C-N> :NERDTreeToggle<CR>
 
 "toggle line numbers
 noremap <C-l> :set invnu<CR>
@@ -150,7 +150,12 @@ map <silent> <leader>bp :Bp<CR>
 
 " Poweline optionv
 let g:Powerline_symbols='fancy'
+call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
 
+" Taglist bindings and settings
+nnoremap <silent> <F8> :TlistToggle<CR>
+let g:Tlist_Use_Right_Window=1
+let g:Tlist_GainFocus_On_ToggleOpen=1
 
 let g:ctrlp_working_path_mode=''
 let g:ctrlp_root_markers='.ctrlp'
@@ -169,3 +174,8 @@ augroup END
 
 au BufRead,BufNewFile *.slim set filetype=slim
 au! Syntax slim source ~/.vim/syntax/slim.vim
+
+au BufRead,BufNewFile *.notes set filetype=note
+augroup filetype_note
+    set spell
+augroup END
