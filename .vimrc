@@ -26,6 +26,7 @@ inoremap <Left> <nop>
 inoremap <Right> <nop>
 
 
+
 filetype on  " Automatically detect file types.
 set nocompatible  " We don't want vi compatibility.
 set laststatus=2   " Always show the statusline
@@ -112,6 +113,8 @@ set directory=~/.vim/tmp     " Where temporary files will go.
 "folding
 set foldmethod=syntax
 set foldopen-=search
+set foldcolumn=2
+nnoremap <Space> za
 
 " bindings
 
