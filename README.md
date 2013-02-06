@@ -11,10 +11,15 @@ Installation Instructions
 > \curl -L https://get.rvm.io | bash -s stable --rails
 
 > hg clone https://vim.googlecode.com/hg/ vim
+
 > ./configure --with-features=huge --with-x --enable-gui --enable-rubyinterp --enable-pythoninterp
 
 > make
+
 > sudo make install
+
 > git clone git://github.com/garethk/vim-config .vim
+
 > cd .vim
+
 > ./init
