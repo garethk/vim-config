@@ -169,6 +169,9 @@ set fileencoding=utf-8
 
 " autocommands
 
+" fix html indenting a little
+autocmd FileType html setlocal indentkeys-=*<Return>
+
 augroup filetype_php
   autocmd!
   autocmd FileType php :iabbrev iff if ( ) {<Left><Left><Left><Left>
