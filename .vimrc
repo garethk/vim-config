@@ -119,9 +119,9 @@ nnoremap <Space> za
 " bindings
 
 " NerdTree on Control-N
-inoremap <silent><C-N> <ESC>:NERDTreeToggle<CR>
-nnoremap <silent><C-N> :NERDTreeToggle<CR>
-vnoremap <silent><C-N> :NERDTreeToggle<CR>
+inoremap <silent><C-N> <ESC>:NERDTreeTabsToggle<CR>
+nnoremap <silent><C-N> :NERDTreeTabsToggle<CR>
+vnoremap <silent><C-N> :NERDTreeTabsToggle<CR>
 
 "toggle line numbers
 noremap <C-l> :set invnu<CR>
@@ -184,4 +184,10 @@ au! Syntax slim source ~/.vim/syntax/slim.vim
 au BufRead,BufNewFile *.notes set filetype=note
 augroup filetype_note
     set spell
+augroup END
+
+au BufNewFile,BufReadPost *.coffee set filetype=coffee
+augroup filetype_coffee
+    setl shiftwidth=2 expandtab
+    setl foldmethod=indent
 augroup END
