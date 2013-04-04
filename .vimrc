@@ -116,6 +116,20 @@ set foldopen-=search
 set foldcolumn=2
 nnoremap <Space> za
 
+function! NeatFoldText() "{{{2
+    let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{{\d*\s*', '', 'g') . ' '
+    let lines_count = v:foldend - v:foldstart + 1
+    let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
+    let foldchar = '·'
+    let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 1, (winwidth(0)*2)/3)
+    let foldtextend = lines_count_text . repeat(foldchar, 8)
+    let length = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g'))
+    return foldtextstart . repeat(foldchar, winwidth(0)-length) . foldtextend
+endfunction
+
+" set foldtext=NeatFoldText()
+
+
 " bindings
 
 " NerdTree on Control-N
