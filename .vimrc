@@ -177,6 +177,10 @@ let g:Tlist_GainFocus_On_ToggleOpen=1
 let g:ctrlp_working_path_mode=''
 let g:ctrlp_root_markers='.ctrlp'
 
+" Startify stuff
+let g:startify_bookmarks = [ '~/.vimrc' ]
+
+
 set enc=utf-8
 set termencoding=utf-8
 set fileencoding=utf-8
