@@ -1,4 +1,4 @@
-"r_dump($stor bundles/plugins file to install from
+let g:vundle_default_git_proto = 'git'
 source ~/.vim/bundles.vim
 
 " set the <leader> placeholder to be ,
@@ -56,6 +56,7 @@ set history=256  " Number of things to remember in history.
 set autowrite  " Writes on make/shell commands
 set ruler  " Ruler on
 set nu  " Line numbers on
+set relativenumber
 set nowrap  " Line wrapping off
 set timeoutlen=250  " Time to wait after ESC (default causes an annoying delay)
 " colorscheme vividchalk  " Uncomment this to set a default theme
@@ -194,6 +195,8 @@ augroup filetype_php
   autocmd!
   autocmd FileType php :iabbrev iff if ( ) {<Left><Left><Left><Left>
   autocmd FileType php :iabbrev protfun /** * */protected function _(){
+  autocmd FileType php let b:dispatch = '/data/istock/ZF/unittest/phpunit %'
+  autocmd FileType php nnoremap <leader>ut :Dispatch<CR>
 augroup END
 
 au BufRead,BufNewFile *.slim set filetype=slim
