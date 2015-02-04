@@ -1,10 +1,9 @@
-"r_dump($stor bundles/plugins file to install from
 source ~/.vim/bundles.vim
 
 " set the <leader> placeholder to be ,
-let mapleader = ","
+let mapleader = " "
 " localleader can be used for specific files
-let maplocalleader = ",,"
+let maplocalleader = ","
 
 " set jk in insert mode to be esc (far faster than reaching all the way to esc)
 inoremap jk <esc>
@@ -151,6 +150,18 @@ nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 " reload your vimrc in the current buffer
 nnoremap <leader>sv :source $MYVIMRC<CR>:echom 'Resourced vimrc file'<CR>
 
+" other leader mappings
+nnoremap <leader><leader> V
+nnoremap <leader>w :w<CR>
+nnoremap <leader>o :CtrlP<CR>
+
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
+
 " paste mode
 nnoremap <leader>pm :set invpaste<CR>
 
@@ -170,22 +181,37 @@ let g:Powerline_symbols='fancy'
 call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
 
 " Taglist bindings and settings
-nnoremap <silent> <F8> :TlistToggle<CR>
+nnoremap <silent> <leader>tl :TlistToggle<CR>
 let g:Tlist_Use_Right_Window=1
 let g:Tlist_GainFocus_On_ToggleOpen=1
 
 let g:ctrlp_working_path_mode=''
 let g:ctrlp_root_markers='.ctrlp'
 
+" phpctags config
+let g:tagbar_phpctags_bin='~/.vim/bundle/tagbar-phpctags/bin/phpctags'
+
+" ctags new tab
+" nmap <C-\> <C-w><C-]><C-w>T
+nmap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+
 " Startify stuff
 let g:startify_bookmarks = [ '~/.vimrc' ]
 
+" grep replace
+set grepprg=ack-grep\ -k
 
 set enc=utf-8
 set termencoding=utf-8
 set fileencoding=utf-8
 
 " autocommands
+
+autocmd User fugitive
+            \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
+            \   nnoremap  <buffer> .. :edit %:h<CR> |
+            \ endif
+autocmd BufReadPost fugitive://* set bufhidden=delete
 
 " fix html indenting a little
 autocmd FileType html setlocal indentkeys-=*<Return>
