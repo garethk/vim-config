@@ -1,5 +1,78 @@
-source ~/.vim/bundles.vim
+" vim:fdm=marker
+" Just my vimrc file
 
+" Bundle setup ----------------------------------------------------------- {{{
+source ~/.vim/bundles.vim
+" }}}
+" Basic options ---------------------------------------------------------- {{{
+set encoding=utf-8
+set termencoding=utf-8
+set fileencoding=utf-8
+set modelines=0
+set autoindent
+set showmode
+set showcmd
+set hidden
+set ttyfast
+set ruler
+set backspace=indent,eol,start
+set norelativenumber
+set history=1000
+set undofile
+set undoreload=10000
+set list
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
+set lazyredraw
+set matchtime=3
+set showbreak=↪
+set splitbelow
+set splitright
+set autowrite
+set autoread
+set shiftround
+set title
+set linebreak
+set colorcolumn=+1
+set nocompatible        " We don't want vi compatibility.
+set laststatus=2        " Always show the statusline
+set cf                  " Enable error files & error jumping.
+set clipboard+=unnamed  " Yanks go on clipboard instead.
+set history=256         " Number of things to remember in history.
+set nu                  " Line numbers on
+set notimeout
+set ttimeout
+set ttimeoutlen=10      " Time to wait after ESC (default causes a delay)
+
+set ts=4                " Tabs are 4 spaces
+set bs=2                " Backspace over everything in insert mode
+set shiftwidth=4        " Tabs under smart indent
+
+set nocp incsearch
+set cinoptions=:0,p0,t0
+set cinwords=if,else,while,do,for,switch,case
+set formatoptions=tcqr
+set cindent
+set autoindent
+set smarttab
+set expandtab
+set wildmenu
+set incsearch
+set ignorecase
+set smartcase
+set infercase
+" Visual
+set showmatch  " Show matching brackets.
+set mat=5  " Bracket blinking.
+set novisualbell  " No blinking .
+set noerrorbells  " No noise.
+" gvim specific
+set mousehide  " Hide mouse after chars typed
+set mouse=a  " Mouse in all modes
+
+filetype on  " Automatically detect file types.
+syntax enable
+" }}}
+" Leader and Basic Keymappings ------------------------------------------- {{{
 " set the <leader> placeholder to be ,
 let mapleader = " "
 " localleader can be used for specific files
@@ -23,118 +96,6 @@ inoremap <Up> <nop>
 inoremap <Down> <nop>
 inoremap <Left> <nop>
 inoremap <Right> <nop>
-
-
-
-filetype on  " Automatically detect file types.
-set nocompatible  " We don't want vi compatibility.
-set laststatus=2   " Always show the statusline
-
-
-" Add recently accessed projects menu (project plugin)
-set viminfo^=!
-
-" Minibuffer Explorer Settings
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1
-
-" alt+n or alt+p to navigate between entries in QuickFix
-"map   :cp 
-"map   :cn 
-
-" Change which file opens after executing :Rails command
-let g:rails_default_file='config/database.yml'
-
-syntax enable
-
-set cf  " Enable error files & error jumping.
-set clipboard+=unnamed  " Yanks go on clipboard instead.
-set history=256  " Number of things to remember in history.
-set autowrite  " Writes on make/shell commands
-set ruler  " Ruler on
-set nu  " Line numbers on
-set nowrap  " Line wrapping off
-set timeoutlen=250  " Time to wait after ESC (default causes an annoying delay)
-" colorscheme vividchalk  " Uncomment this to set a default theme
-
-
-" Make Comments Grey (for ease of reading on dark background
-"hi Folded ctermbg=black ctermfg=gray
-"hi Comment ctermfg=darkgrey
-"
-"highlight DiffAdd cterm=none ctermfg=gray ctermbg=darkblue
-"highlight DiffDelete cterm=none ctermfg=gray ctermbg=cyan
-"highlight DiffChange cterm=none ctermfg=green ctermbg=black 
-"highlight DiffText cterm=none ctermfg=green ctermbg=darkgreen 
-"highlight Directory cterm=none ctermfg=lightblue ctermbg=none
-
-" Force 256 colours in term
-set t_Co=256
-colorscheme hybrid
-
-" Formatting (some of these are for coding in C and C++)
-set ts=4  " Tabs are 4 spaces
-set bs=2  " Backspace over everything in insert mode
-set shiftwidth=4  " Tabs under smart indent
-set nocp incsearch
-set cinoptions=:0,p0,t0
-set cinwords=if,else,while,do,for,switch,case
-set formatoptions=tcqr
-set cindent
-set autoindent
-set smarttab
-set expandtab
-set wildmenu
-set incsearch
-set ignorecase
-set smartcase
-set infercase
-
-" Visual
-set showmatch  " Show matching brackets.
-set mat=5  " Bracket blinking.
-
-set lcs=tab:\ \ ,eol:$,trail:~,extends:>,precedes:<
-set novisualbell  " No blinking .
-set noerrorbells  " No noise.
-
-" gvim specific
-set mousehide  " Hide mouse after chars typed
-set mouse=a  " Mouse in all modes
-
-" Backups & Files
-set backup                     " Enable creation of backup file.
-set backupdir=~/.vim/backups " Where backups will go.
-set directory=~/.vim/tmp     " Where temporary files will go.
-
-"folding
-set foldmethod=syntax
-set foldopen-=search
-set foldcolumn=2
-nnoremap <Space> za
-
-function! NeatFoldText() "{{{2
-    let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{{\d*\s*', '', 'g') . ' '
-    let lines_count = v:foldend - v:foldstart + 1
-    let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
-    let foldchar = '·'
-    let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 1, (winwidth(0)*2)/3)
-    let foldtextend = lines_count_text . repeat(foldchar, 8)
-    let length = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g'))
-    return foldtextstart . repeat(foldchar, winwidth(0)-length) . foldtextend
-endfunction
-
-" set foldtext=NeatFoldText()
-
-
-" bindings
-
-" NerdTree on Control-N
-inoremap <silent><C-N> <ESC>:NERDTreeTabsToggle<CR>
-nnoremap <silent><C-N> :NERDTreeTabsToggle<CR>
-vnoremap <silent><C-N> :NERDTreeTabsToggle<CR>
 
 "toggle line numbers
 noremap <C-l> :set invnu<CR>
@@ -169,6 +130,67 @@ nnoremap <leader>pm :set invpaste<CR>
 inoremap <c-u> <esc>viwUA<CR>
 " control-u will uppercase the word the cursor is on when in normal-mode
 nnoremap <c-u> viwU
+" }}}
+" Backups & Files -------------------------------------------------------- {{{
+set backup                     " Enable creation of backup file.
+set backupdir=~/.vim/backups " Where backups will go.
+set directory=~/.vim/tmp     " Where temporary files will go.
+" }}}
+" Folding ---------------------------------------------------------------- {{{
+set foldlevelstart=0
+set foldmethod=syntax
+set foldopen-=search
+set foldcolumn=2
+nnoremap <Space> za
+vnoremap <Space> za
+nnoremap zO zczO
+
+function! MyFoldText() 
+    let line = getline(v:foldstart)
+
+    let nucolwidth = &fdc + &number * &numberwidth
+    let windowwidth = winwidth(0) - nucolwidth - 3
+    let foldedlinecount = v:foldend - v:foldstart
+
+    " expand tabs into spaces
+    let onetab = strpart('          ', 0, &tabstop)
+    let line = substitute(line, '\t', onetab, 'g')
+
+    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+    let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
+    return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
+endfunction 
+set foldtext=MyFoldText()
+
+" }}}
+" Colour Settings -------------------------------------------------------- {{{
+" Force 256 colours in term
+set t_Co=256
+colorscheme hybrid
+" }}}
+" Plugin Bindings -------------------------------------------------------- {{{
+" Add recently accessed projects menu (project plugin)
+set viminfo^=!
+
+" Minibuffer Explorer Settings
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplModSelTarget = 1
+
+" Change which file opens after executing :Rails command
+let g:rails_default_file='config/database.yml'
+
+
+
+" bindings
+
+" NerdTree on Control-N
+inoremap <silent><C-N> <ESC>:NERDTreeTabsToggle<CR>
+nnoremap <silent><C-N> :NERDTreeTabsToggle<CR>
+vnoremap <silent><C-N> :NERDTreeTabsToggle<CR>
+let g:nerdtree_tabs_autofind = 1
+
 
 " XDEBUG
 " xdebug mapping instead of f12 
@@ -200,12 +222,20 @@ let g:startify_bookmarks = [ '~/.vimrc' ]
 
 " grep replace
 set grepprg=ack-grep\ -k
+" }}}
+" Autocommands ----------------------------------------------------------- {{{
 
-set enc=utf-8
-set termencoding=utf-8
-set fileencoding=utf-8
+" Vim {{{
 
-" autocommands
+augroup ft_vim
+    au!
+
+    au FileType vim setlocal foldmethod=marker
+    au FileType help setlocal textwidth=78
+    au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
+augroup END
+
+" }}}
 
 autocmd User fugitive
             \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
@@ -235,3 +265,4 @@ augroup filetype_coffee
     setl shiftwidth=2 expandtab
     setl foldmethod=indent
 augroup END
+" }}}
