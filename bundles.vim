@@ -1,33 +1,38 @@
 set nocompatible
 filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-fugitive'
+Plugin 'gregsexton/gitv'
+Plugin 'majutsushi/tagbar'
+Plugin 'vim-scripts/tagbar-phpctags'
+Plugin 'ludovicPelle/vim-xdebug'
+"Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'Lokaltog/vim-powerline'
+Plugin 'w0ng/vim-hybrid.git'
+Plugin 'int3/vim-taglist-plus'
+Plugin 'pangloss/vim-javascript.git'
+Plugin 'scrooloose/syntastic.git'
+Plugin 'kchmck/vim-coffee-script.git'
+Plugin 'plasticboy/vim-markdown.git'
+Plugin 'airblade/vim-gitgutter.git'
+Plugin 'mhinz/vim-startify.git'
+Plugin 'nelstrom/vim-markdown-preview'
+Plugin 'swekaj/php-foldexpr.vim'
+Plugin 'whatyouhide/vim-gotham'
+Plugin 'ajh17/Spacegray.vim'
+Plugin 'unblevable/quick-scope'
+Plugin 'fatih/vim-go'
+
+call vundle#end()
 filetype plugin indent on
-
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-Bundle 'git://github.com/gmarik/vundle'
-Bundle 'git://github.com/scrooloose/nerdtree'
-Bundle 'git://github.com/jistr/vim-nerdtree-tabs'
-Bundle 'git://github.com/Xuyuanp/nerdtree-git-plugin'
-Bundle 'git://github.com/tpope/vim-rails'
-Bundle 'git://github.com/tpope/vim-surround'
-Bundle 'git://github.com/tpope/vim-dispatch'
-Bundle 'git://github.com/tpope/vim-fugitive'
-Bundle 'git://github.com/gregsexton/gitv'
-Bundle 'git://github.com/majutsushi/tagbar'
-Bundle 'git://github.com/vim-scripts/tagbar-phpctags'
-Bundle 'git://github.com/ludovicPelle/vim-xdebug'
-Bundle 'git://github.com/kien/ctrlp.vim'
-Bundle 'git://github.com/Lokaltog/vim-powerline'
-Bundle 'git://github.com/w0ng/vim-hybrid.git'
-Bundle 'git://github.com/int3/vim-taglist-plus'
-Bundle 'git://github.com/pangloss/vim-javascript.git'
-Bundle 'git://github.com/scrooloose/syntastic.git'
-Bundle 'git://github.com/kchmck/vim-coffee-script.git'
-Bundle 'git://github.com/plasticboy/vim-markdown.git'
-Bundle 'git://github.com/airblade/vim-gitgutter.git'
-Bundle 'git://github.com/mhinz/vim-startify.git'
-Bundle 'git://github.com/nelstrom/vim-markdown-preview'
-Bundle 'git://github.com/swekaj/php-foldexpr.vim'
-Bundle 'git://github.com/whatyouhide/vim-gotham'
-Bundle 'git://github.com/ajh17/Spacegray.vim'

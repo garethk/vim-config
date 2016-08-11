@@ -1,4 +1,4 @@
-" vim:fdm=marker
+" vim: fdm=marker:fdls=0:fdl=0
 " Just my vimrc file
 
 " Bundle setup ----------------------------------------------------------- {{{
@@ -8,7 +8,8 @@ source ~/.vim/bundles.vim
 set encoding=utf-8
 set termencoding=utf-8
 set fileencoding=utf-8
-set modelines=0
+set modeline
+set modelines=5
 set autoindent
 set showmode
 set showcmd
@@ -39,10 +40,9 @@ set cf                  " Enable error files & error jumping.
 set clipboard+=unnamed  " Yanks go on clipboard instead.
 set history=256         " Number of things to remember in history.
 set nu                  " Line numbers on
-set notimeout
-set ttimeout
 set ttimeoutlen=10      " Time to wait after ESC (default causes a delay)
-
+set timeoutlen=150
+set nospell
 set ts=4                " Tabs are 4 spaces
 set bs=2                " Backspace over everything in insert mode
 set shiftwidth=4        " Tabs under smart indent
@@ -61,28 +61,25 @@ set ignorecase
 set smartcase
 set infercase
 " Visual
-set showmatch  " Show matching brackets.
-set mat=5  " Bracket blinking.
-set novisualbell  " No blinking .
-set noerrorbells  " No noise.
+set showmatch           " Show matching brackets.
+set mat=5               " Bracket blinking.
+set novisualbell        " No blinking .
+set noerrorbells        " No noise.
 " gvim specific
-set mousehide  " Hide mouse after chars typed
-set mouse=a  " Mouse in all modes
+set mousehide           " Hide mouse after chars typed
+set mouse=a             " Mouse in all modes
 
-filetype on  " Automatically detect file types.
+filetype on             " Automatically detect file types.
 syntax enable
 " }}}
 " Leader and Basic Keymappings ------------------------------------------- {{{
-" set the <leader> placeholder to be ,
-let mapleader = " "
-" localleader can be used for specific files
-let maplocalleader = ","
+let mapleader = " "      " set the <leader> placeholder to be a space 
+let maplocalleader = "," " localleader can be used for specific files
 
-" set jk in insert mode to be esc (far faster than reaching all the way to esc)
+" set jk in insert mode to be esc 
 inoremap jk <esc>
 
 " training mappings to discourage the use of certain keys
-
 " stop esc being esc
 inoremap <esc> <nop>
 
@@ -135,14 +132,13 @@ nnoremap <c-u> viwU
 set backup                     " Enable creation of backup file.
 set backupdir=~/.vim/backups " Where backups will go.
 set directory=~/.vim/tmp     " Where temporary files will go.
+set undodir=~/.vim/undo      " Where undo files will go
 " }}}
 " Folding ---------------------------------------------------------------- {{{
 set foldlevelstart=0
-set foldmethod=syntax
+set foldmethod=marker
 set foldopen-=search
 set foldcolumn=2
-nnoremap <Space> za
-vnoremap <Space> za
 nnoremap zO zczO
 
 function! MyFoldText() 
@@ -166,6 +162,7 @@ set foldtext=MyFoldText()
 " Colour Settings -------------------------------------------------------- {{{
 " Force 256 colours in term
 set t_Co=256
+set background=dark
 colorscheme hybrid
 " }}}
 " Plugin Bindings -------------------------------------------------------- {{{
@@ -181,7 +178,8 @@ let g:miniBufExplModSelTarget = 1
 " Change which file opens after executing :Rails command
 let g:rails_default_file='config/database.yml'
 
-
+" Quick scope - only highlight on keypress
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 " bindings
 
@@ -197,6 +195,7 @@ let g:nerdtree_tabs_autofind = 1
 map <F10> :python debugger_watch_input("property_get", '<cword>')<cr>A<cr>
 let g:debuggerMaxDepth=10
 map <silent> <leader>bp :Bp<CR>
+map <leader>dbg :python debugger_run()<cr>
 
 " Poweline optionv
 let g:Powerline_symbols='fancy'
@@ -222,6 +221,16 @@ let g:startify_bookmarks = [ '~/.vimrc' ]
 
 " grep replace
 set grepprg=ack-grep\ -k
+
+
+" go bindings
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_interfaces = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
 " }}}
 " Autocommands ----------------------------------------------------------- {{{
 
@@ -250,6 +259,8 @@ augroup filetype_php
   autocmd!
   autocmd FileType php :iabbrev iff if ( ) {<Left><Left><Left><Left>
   autocmd FileType php :iabbrev protfun /** * */protected function _(){
+  setl foldlevelstart=20
+  setl foldmethod=syntax
 augroup END
 
 au BufRead,BufNewFile *.slim set filetype=slim
@@ -257,7 +268,7 @@ au! Syntax slim source ~/.vim/syntax/slim.vim
 
 au BufRead,BufNewFile *.notes set filetype=note
 augroup filetype_note
-    set spell
+    setl spell
 augroup END
 
 au BufNewFile,BufReadPost *.coffee set filetype=coffee
@@ -265,4 +276,18 @@ augroup filetype_coffee
     setl shiftwidth=2 expandtab
     setl foldmethod=indent
 augroup END
+
+au BufNewFile,BufReadPost *.go set filetype=go
+augroup filetype_go
+    setl foldlevelstart=20
+    nmap <leader>r <Plug>(go-run)
+    nmap <leader>b <Plug>(go-build)
+    nmap <leader>t <Plug>(go-test)
+    nmap <leader>c <Plug>(go-coverage)
+
+    nmap <leader>ds <Plug>(go-def-split)
+    nmap <leader>dv <Plug>(go-def-vertical)
+    nmap <leader>dt <Plug>(go-def-tab)
+augroup END
+
 " }}}
