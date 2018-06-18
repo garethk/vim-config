@@ -83,6 +83,9 @@ inoremap jk <esc>
 " stop esc being esc
 inoremap <esc> <nop>
 
+nnoremap <leader>m :!make<CR>
+nnoremap <leader>mr :!make run<CR>
+
 " remove the arrow keys in normal mode, use hjkl instead
 nnoremap <silent> <Up> :wincmd k<CR>
 nnoremap <silent> <Down> :wincmd j<CR>
@@ -196,6 +199,7 @@ map <F10> :python debugger_watch_input("property_get", '<cword>')<cr>A<cr>
 let g:debuggerMaxDepth=10
 map <silent> <leader>bp :Bp<CR>
 map <leader>dbg :python debugger_run()<cr>
+let g:debuggerPort=6666
 
 " Poweline optionv
 let g:Powerline_symbols='fancy'
